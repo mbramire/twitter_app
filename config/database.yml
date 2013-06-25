@@ -24,3 +24,9 @@ production:
   adapter: postgresql
   database: twitter_app
   host: localhost
+
+mac:
+  adapter: postgresql
+  database: twitter_app
+  host: localhost
+
