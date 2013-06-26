@@ -7,8 +7,8 @@ development:
   adapter: postgresql
   database: twitter_app
   host: localhost
-  username: matt
-  password: ch1b3ars
+  #username: matt
+  #password: ch1b3ars
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -17,8 +17,8 @@ test:
   adapter: postgresql
   database: twitter_app_test
   host: localhost 
-  username: matt
-  password: ch1b3ars
+  #username: matt
+  #password: ch1b3ars
 
 production:
   adapter: postgresql
