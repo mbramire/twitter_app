@@ -30,3 +30,8 @@ mac:
   database: twitter_app
   host: localhost
 
+mactest:
+  adapter: postgresql
+  database: twitter_app_test
+  host: localhost
+
