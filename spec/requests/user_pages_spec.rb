@@ -19,7 +19,7 @@ describe "User pages" do
 	  it { should have_selector('title', text: user.name) }
 	end
 
-  describe "sign up" do
+  describe "user sign up" do
     before { visit signup_path }
     let(:submit) { "Create my account" } 
 
@@ -44,16 +44,16 @@ describe "User pages" do
         fill_in "Confirmation", with: "foobar"
       end
 
-      it "should create a user" do
-        expect { click_button submit }.to change(User, :count).by(1)
-      end
-
       describe "after saving the user" do
         before { click_button submit }
-        let(:user) { User.find_by_email('user@example.com') }
+        let(:user) { User.find_by_email('email@email.com') }
 
         it { should have_selector('title', text: user.name) }
         it { should have_selector('div.alert.alert-success', text: 'Welcome') }
+      end
+
+      it "should create a user" do
+        expect { click_button submit }.to change(User, :count).by(1)
       end
     end
   end
