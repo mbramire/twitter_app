@@ -65,8 +65,11 @@ describe "User pages" do
 
   describe "edit" do
     let(:user) { FactoryGirl.create(:user) }
-    before { visit edit_user_path(user) }
-
+    before do 
+      valid_signin user
+      visit edit_user_path(user)
+    end
+    
     describe "page" do 
       it { should have_selector('h1', text: "Edit your profile") }
       it { should have_selector('title', text: 'Edit user') }
@@ -77,6 +80,24 @@ describe "User pages" do
       before { click_button "Save changes" }
 
       it { should have_content('error') }
+    end
+
+    describe "with valid information" do
+      let(:newname) { "New Name" }
+      let(:newemail) { "new@email.com" }
+      before do
+        fill_in "Name", with: newname
+        fill_in "Email", with: newemail
+        fill_in "Password", with: user.password
+        fill_in "Confirm Password", with: user.password
+        click_button "Save changes"
+      end
+
+      it { should have_selector('title', text: newname) }
+      it { should have_selector('div.alert.alert-success') }
+      it { should have_link('Sign out', href: signout_path) }
+      specify { user.reload.name.should == newname }
+      specify { user.reload.email.should == newemail }
     end
   end
 end
