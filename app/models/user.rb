@@ -13,6 +13,7 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :name, :password, :password_confirmation, :status
   has_secure_password
+  has_many :microposts
 
   before_save { email.downcase! }
   before_save :create_remember_token

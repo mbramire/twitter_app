@@ -17,8 +17,8 @@ test:
   adapter: postgresql
   database: twitter_app_test
   host: localhost 
-  username: matt
-  password: ch1b3ars
+  #username: matt
+  #password: ch1b3ars
 
 production:
   adapter: postgresql
