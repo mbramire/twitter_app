@@ -150,6 +150,15 @@ describe User do
     it "should have the right micropost in the right order" do
       @user.microposts.should == [newer_micropost, older_micropost]
     end
+
+    it "should destroy associated microposts" do
+      microposts = @user.microposts.dup
+      @user.destroy
+      microposts.should_not be_empty
+      microposts.each do |mp|
+        Micropost.find_by_id(mp.id).should be_nil
+      end
+    end
   end
 end
 
