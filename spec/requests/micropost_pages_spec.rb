@@ -34,12 +34,22 @@ describe "Micropost pages" do
 	describe "micropost destruction" do
 		before { FactoryGirl.create(:micropost, user: user) }
 
-    describe "as correct user" do
-      before { visit root_path }
+		describe "as correct user" do
+		  before { visit root_path }
 
-      it "should delete a micropost" do
-        expect { click_link "delete" }.to change(Micropost, :count).by(-1)
-      end
-    end
+		  it "should delete a micropost" do
+		    expect { click_link "delete" }.to change(Micropost, :count).by(-1)
+		  end
+		end
+	end
+
+	describe "micoropost aside" do
+		before do 
+			FactoryGirl.create(:micropost, user: user)
+			FactoryGirl.create(:micropost, user: user)
+			visit root_path
+		end
+		
+		it { should have_content('2 microposts') }
 	end
 end
