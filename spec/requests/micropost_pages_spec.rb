@@ -5,6 +5,7 @@ describe "Micropost pages" do
 	subject { page }
 
 	let(:user) { FactoryGirl.create(:user) }
+	let(:followed_user) { FactoryGirl.create(:user) }
 	before { valid_signin user }
 
 	describe "micropost creation" do
@@ -32,14 +33,25 @@ describe "Micropost pages" do
 	end
 
 	describe "micropost destruction" do
-		before { FactoryGirl.create(:micropost, user: user) }
-
+		
 		describe "as correct user" do
-		  before { visit root_path }
+		  before do  
+		  	FactoryGirl.create(:micropost, user: user)
+		  	visit root_path
+		  end
 
 		  it "should delete a micropost" do
 		    expect { click_link "delete" }.to change(Micropost, :count).by(-1)
 		  end
+		end
+
+		describe "for a followed user" do
+			before do 
+				FactoryGirl.create(:micropost, user: followed_user) 
+				visit root_path
+			end
+
+			it { should_not have_link('delete') } 
 		end
 	end
 
