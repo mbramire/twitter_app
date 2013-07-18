@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   end
 
   def following?(other_user)
-    # the self. is not necessary jere, a matter of preference
+    # the self. is not necessary here, a matter of preference
     self.relationships.find_by_followed_id(other_user.id) 
   end
 
